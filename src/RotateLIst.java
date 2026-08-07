@@ -16,7 +16,11 @@ public class RotateLIst {
     }
 
     static void main() {
-        System.out.println(rotateRight(new ListNode(1,new ListNode(2,new ListNode(3,new ListNode(4,new ListNode(5))))),2));
+        ListNode res = rotateRight(new ListNode(1,new ListNode(2,new ListNode(3,new ListNode(4,new ListNode(5))))),2);
+        while (res.next != null) {
+            System.out.println(res.val);
+            res = res.next;
+        }
     }
 
     public static ListNode rotateRight(ListNode head, int k) {
