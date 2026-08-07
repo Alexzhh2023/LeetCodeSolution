@@ -1,5 +1,5 @@
-public class RotateLIst {
-    public static class ListNode {
+class RotateLIst {
+    static class ListNode {
         int val;
         ListNode next;
 
