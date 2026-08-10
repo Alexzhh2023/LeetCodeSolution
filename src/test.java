@@ -9,7 +9,8 @@ public class test {
 //        System.out.println(res.size());
 //        System.out.println(res.toString());
 //        System.out.println((1/3) * 3);
-        System.out.println(5 & 1);
+//        System.out.println(5 & 1);
+        System.out.println(Arrays.toString("abbacaacda".split("a")));
     }
 
 
