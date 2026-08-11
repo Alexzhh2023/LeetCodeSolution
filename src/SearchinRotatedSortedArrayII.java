@@ -1,20 +1,21 @@
-public class SearchinRotatedSortedArray {
+public class SearchinRotatedSortedArrayII {
     static void main() {
-//        System.out.println(search(new int[]{4,5,6,7,8,1,2}, 2));
         System.out.println(search(new int[]{1,0,1,1,1}, 0));
     }
 
-
-    public static int search(int[] nums, int target) {
+    public static boolean search(int[] nums, int target) {
         int start = 0, end = nums.length -1 ;
 
         while (start <= end) {
             int mid = (start + end)/2;
             if (nums[mid] == target) {
-                return mid;
+                return true;
             }
-
-            if (nums[mid] >= nums[start]) {
+            if (nums[start] == nums[mid] && nums[mid] == nums[end]) {
+                start++;
+                end--;
+            }
+            else if (nums[mid] >= nums[start]) {
                 if (target >= nums[start] && target < nums[mid]) {
                     end = mid-1;
                 } else  {
@@ -28,6 +29,6 @@ public class SearchinRotatedSortedArray {
                 }
             }
         }
-        return -1;
+        return false;
     }
 }

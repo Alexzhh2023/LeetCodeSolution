@@ -10,8 +10,13 @@ public class test {
 //        System.out.println(res.toString());
 //        System.out.println((1/3) * 3);
 //        System.out.println(5 & 1);
-        System.out.println(Arrays.toString("abbacaacda".split("a")));
+//        System.out.println(Arrays.toString("abbacaacda".split("a")));
+
+        String x = "0123456789";
+        System.out.println(x.substring(0,3));
+        System.out.println(x.substring(3));
     }
+
 
 
     public static void helper(StringBuilder s, ArrayList<String> resList, int index, String [] strings) {
