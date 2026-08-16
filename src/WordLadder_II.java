@@ -12,19 +12,19 @@ public class WordLadder_II {
         if (!wordSet.contains(endWord)) {
             return res;
         }
-        Map<String, List<String>> parentList = new HashMap<>();
+        Map<String, List<String>> parentListMap = new HashMap<>();
         Set<String> level = new HashSet<>();
         level.add(beginWord);
         boolean found = false;
 
-        while (!level.isEmpty() && !found) {
+        while(!level.isEmpty() && !found) {
             wordSet.removeAll(level);
             Set<String> nextLevel = new HashSet<>();
-            for (String curWord : level) {
+            for( String curWord : level) {
                 char [] charArray = curWord.toCharArray();
                 for (int i = 0; i < charArray.length; i++) {
-                    char origin = charArray[i];
-                    for (char c = 'a'; c <= 'z'; c++) {
+                    char origin =  charArray[i];
+                    for (char c = 'a'; c <= 'z'; c ++) {
                         if (c == origin) {
                             continue;
                         }
@@ -34,7 +34,7 @@ public class WordLadder_II {
                             continue;
                         }
                         nextLevel.add(newWord);
-                        parentList.computeIfAbsent(newWord, k -> new ArrayList<>()).add(curWord);
+                        parentListMap.computeIfAbsent(newWord, k -> new ArrayList<>()).add(curWord);
                         if (newWord.equals(endWord)) {
                             found = true;
                         }
@@ -49,22 +49,19 @@ public class WordLadder_II {
         }
         List<String> path = new ArrayList<>();
         path.add(endWord);
-        helper(beginWord,endWord,parentList, path, res);
+        helper(beginWord, endWord, path, parentListMap, res);
         return res;
     }
 
-    public void helper(String beginWord, String current, Map<String, List<String>> parentList, List<String> path, List<List<String>> res) {
-        if (beginWord.equals(current)) {
-            List<String> newPath = new ArrayList<>(path);
-            Collections.reverse(newPath);
-            res.add(newPath);
+    public void helper(String beginWord, String current, List<String> path, Map<String, List<String>> parentList, List<List<String>> res) {
+        if (current.equals(beginWord)) {
+            res.add(new ArrayList<>(path));
             return;
         }
-
         for (String curWord : parentList.getOrDefault(current, new ArrayList<>())) {
-            path.add(curWord);
-            helper(beginWord,curWord,parentList,path,res);
-            path.removeLast();
+            path.add(0, curWord);
+            helper(beginWord, curWord, path, parentList, res);
+            path.removeFirst();
         }
     }
 }

@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class test {
     static void main() {
@@ -12,9 +11,12 @@ public class test {
 //        System.out.println(5 & 1);
 //        System.out.println(Arrays.toString("abbacaacda".split("a")));
 
-        String x = "0123456789";
-        System.out.println(x.substring(0,3));
-        System.out.println(x.substring(3));
+       List<Integer> list = new ArrayList<>();
+       list.add(1);
+       Map<Integer, List<Integer>> map = new HashMap<>();
+       map.put(1,list);
+       list.add(2);
+       System.out.println(map.get(1));
     }
 
 

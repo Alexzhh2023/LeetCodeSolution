@@ -7,38 +7,43 @@ public class WordLadder_NoDFS {
     }
     public int findLadders(String beginWord, String endWord, List<String> wordList) {
         Set<String> wordSet = new HashSet<>(wordList);
-        if (!wordSet.contains(endWord)) {
-            return 0;
-        }
-        Set<String> level = new HashSet<>();
-        level.add(beginWord);
-        int distance = 1;
-        while (!level.isEmpty()) {
-            wordSet.remove(level);
-            HashSet<String> nextLevel = new HashSet<>();
-            for (String curWord : level) {
-                char[] charArray = curWord.toCharArray();
+        if (!wordSet.contains(endWord)) return 0;
+
+        Set<String> beginSet = new HashSet<>();
+        beginSet.add(beginWord);
+        Set<String> endSet = new HashSet<>();
+        endSet.add(endWord);
+
+        int length = 1;
+        while (!beginSet.isEmpty() && !endSet.isEmpty()) {
+            if (beginSet.size() > endSet.size()) {
+                Set<String> tempSet = beginSet;
+                beginSet = endSet;
+                endSet = tempSet;
+            }
+
+            wordSet.removeAll(beginSet);
+            Set<String> nextLevel = new HashSet<>();
+            for (String word : beginSet) {
+                char[] charArray = word.toCharArray();
                 for (int i = 0; i < charArray.length; i++) {
                     char origin = charArray[i];
                     for (char c = 'a'; c <= 'z'; c++) {
-                        if (c == origin) {
-                            continue;
-                        }
+                        if (c == origin) continue;
                         charArray[i] = c;
                         String newWord = new String(charArray);
-                        if (!wordSet.contains(newWord)) {
-                            continue;
+                        if (endSet.contains(newWord)) {
+                            return length + 1;
                         }
-                        if (newWord.equals(endWord)) {
-                            return distance + 1;
+                        if  (wordSet.contains(newWord)) {
+                            nextLevel.add(newWord);
                         }
-                        nextLevel.add(newWord);
                     }
                     charArray[i] = origin;
                 }
             }
-            level = nextLevel;
-            distance++;
+            beginSet = nextLevel;
+            length++;
         }
         return 0;
     }
