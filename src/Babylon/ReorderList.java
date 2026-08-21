@@ -22,7 +22,7 @@ public class ReorderList {
         ListNode dummy = head;
 
 
-        while(dummy.next != null && pre.next != null) {
+        while(dummy!= null && pre!= null) {
             ListNode dummyTemp = dummy.next;
             ListNode preTemp = pre.next;
             dummy.next = pre;
